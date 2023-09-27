@@ -1,0 +1,13 @@
+#task-adder {
+   display: flex;
+   border-radius: 5px;
+   border: solid 1px #ccc;
+   overflow: hidden;
+}
+#task-adder > * { border: none; }
+#task-adder input { flex: 1 1; padding-inline: 10px; }
+#task-adder button {
+   padding: 5px 10px;
+   font-size: 1.5rem;
+   cursor: pointer;
+}

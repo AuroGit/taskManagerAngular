@@ -1,0 +1,5 @@
+<form id="task-adder">
+   <input type="text" placeholder="Nueva tarea" #taskInput
+      [(ngModel)]="inputVal" name="inputVal">
+   <button (click)="addTask(taskInput.value)">+</button>
+</form>

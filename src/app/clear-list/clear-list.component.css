@@ -1,0 +1,14 @@
+.buttons { display: flex; flex-wrap: wrap; gap: 10px;}
+.buttons button {
+   flex: 1 0 200px;
+   padding: 10px;
+   background-color: transparent;
+   border: solid 2px #ccc;
+   border-radius: 50px;
+   cursor: pointer;
+   transition-property: color, background-color;
+}
+.buttons button:hover {
+   color: #fff;
+   background-color: #000;
+}

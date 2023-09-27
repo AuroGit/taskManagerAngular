@@ -1,0 +1,42 @@
+.container {
+   height: 100vh;
+   max-width: 920px;
+   margin-inline: auto;
+   display: flex;
+   flex-direction: column;
+}
+
+.container header, #task-list, .container footer {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   padding: 50px;
+}
+
+.container header {
+   display: grid;
+   gap: 50px;
+   place-content: center;
+}
+
+#sort-list {
+   margin-inline: 50px;
+   border: solid 2px #ccc;
+   border-radius: 20px;
+   background-color: transparent;
+   padding: 10px;
+   transition-property: color, background-color;
+}
+#sort-list:not([disabled]):hover {
+   cursor: pointer;
+   color: #fff;
+   background-color: #000;
+}
+
+#task-list { padding-block: 10px; flex: 1 1; overflow-y: auto; }
+#task-list::-webkit-scrollbar { width: 10px; }
+#task-list::-webkit-scrollbar-thumb {
+   background-color: #888466;
+   border: solid 1px #fff8ee;
+   border-radius: 10px;
+}

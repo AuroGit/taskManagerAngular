@@ -14,10 +14,11 @@
 }
 
 .container header {
-   display: grid;
+   display: flex;
+   flex-direction: column;
    gap: 50px;
-   place-content: center;
 }
+.container header #logo { width: min(100%, 300px); margin: auto; }
 
 #sort-list {
    margin-inline: 50px;

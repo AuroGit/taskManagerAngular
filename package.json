@@ -1,6 +1,5 @@
 {
   "name": "task-manager-angular",
-  "homepage": "https://aurogit.github.io/taskManagerAngular/dist/task-manager-angular/",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

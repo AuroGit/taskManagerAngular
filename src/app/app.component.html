@@ -1,19 +1,18 @@
 <div class="container">
   <header>
-    <img id="logo" src="../logo.png" />
+    <img id="logo" src="../assets/logo.png" />
 
-    <task-adder [taskList]="taskList"></task-adder>
+    <task-adder></task-adder>
   </header>
 
   <button id="sort-list" [disabled]="disableSortBtn" (click)="sortTasks()">Ordenar Tareas</button>
 
   <ul id="task-list">
-    <task *ngFor="let task of taskList" 
-      [task]="task" [taskList]="taskList"
-      (removeTaskEvent)="removeTask($event)"></task>
+    <task *ngFor="let task of taskListService.taskList" 
+      [task]="task"></task>
   </ul>
 
   <footer>
-    <clear-list (removeEvent)="removeTasks($event)"></clear-list>
+    <clear-list></clear-list>
   </footer>
 </div>

@@ -1,5 +1,5 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
-import { Task } from './task/task.component';
+import { TaskListService } from './task-list.service';
 
 @Component({
   selector: 'app-root',
@@ -8,42 +8,17 @@ import { Task } from './task/task.component';
 })
 
 export class AppComponent implements DoCheck, OnInit {
+  
+  constructor(public taskListService:TaskListService) {}
+
   title = 'taskManagerAngular';
-  taskList:Task[] = [];
   disableSortBtn = false;
 
-  removeTask(id:number) {
-    this.taskList = this.taskList.filter(item => {
-      return item.id != id;
-    });
-    localStorage.setItem('savedTasks', JSON.stringify(this.taskList));
-  }
-  removeTasks(group:string) {
-    switch (group) {
-      case 'done':
-        this.taskList = this.taskList.filter(item => {
-          return item.state != group;
-        });
-        break;
-      case 'all': default:
-        this.taskList = [];
-        break;
-    }
-    localStorage.setItem('savedTasks', JSON.stringify(this.taskList));
-  }
-  sortTasks() {
-    let ongoingTasks = this.taskList.filter(item => item.state == 'ongoing');
-    let pendingTasks = this.taskList.filter(item => item.state == 'pending');
-    let doneTasks = this.taskList.filter(item => item.state == 'done');
-    this.taskList = [...ongoingTasks, ...pendingTasks, ...doneTasks];
-  }
+  sortTasks() { this.taskListService.sort() }
 
-  ngOnInit() {
-    if (localStorage.getItem('savedTasks')) {
-      this.taskList = JSON.parse(localStorage.getItem('savedTasks')!);
-    }
-  }
+  ngOnInit() { this.taskListService.load() }
   ngDoCheck() {
-    this.disableSortBtn = this.taskList?.length > 1 ? false : true;
+    this.disableSortBtn = this.taskListService.taskList.length > 1 
+    ? false : true;
   }
 }

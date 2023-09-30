@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { TaskListService } from '../task-list.service';
 
 @Component({
   selector: 'clear-list',
@@ -7,9 +8,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 
 export class ClearListComponent {
-  @Output() removeEvent = new EventEmitter<string>();
 
-  removeTasksEvent(event:string) {
-    this.removeEvent.emit(event);
+  constructor(public taskListService:TaskListService) {}
+
+  removeTasks(group:string) {
+    this.taskListService.remove(undefined, group);
   }
 }

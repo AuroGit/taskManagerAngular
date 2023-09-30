@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Task } from '../task/task.component';
+import { Component } from '@angular/core';
+import { TaskListService } from '../task-list.service';
 
 @Component({
   selector: 'task-adder',
@@ -7,21 +7,13 @@ import { Task } from '../task/task.component';
   styleUrls: ['./task-adder.component.css']
 })
 export class TaskAdderComponent {
-  @Input() taskList:Task[];
+  
+  constructor(public taskListService:TaskListService) {}
 
   inputVal = '';
 
   addTask(input:string){
-    if (!input) return;
-
-    this.taskList.push({
-      id: Date.now(), 
-      taskTitle: input.trim(),
-      state: 'pending'
-    });
-
+    this.taskListService.add(input.trim());
     this.inputVal = '';
-
-    localStorage.setItem('savedTasks', JSON.stringify(this.taskList));
   }
 }

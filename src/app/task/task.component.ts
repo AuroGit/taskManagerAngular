@@ -1,11 +1,6 @@
-import { Component, DoCheck, ElementRef, EventEmitter, 
-  Input, OnInit, Output, ViewChild } from '@angular/core';
-
-export class Task {
-  id:number = 0;
-  taskTitle:string = '';
-  state:string = '';
-}
+import { Component, DoCheck, ElementRef, Input, OnInit, 
+  ViewChild } from '@angular/core';
+import { Task, TaskListService } from '../task-list.service';
 
 @Component({
   selector: 'task',
@@ -14,9 +9,10 @@ export class Task {
 })
 
 export class TaskComponent implements OnInit, DoCheck {
+  
+  constructor(public taskListService:TaskListService) {}
+
   @Input() task:Task;
-  @Input() taskList:Task[];
-  @Output() removeTaskEvent = new EventEmitter<number>();
   @ViewChild('taskText') taskText:ElementRef;
 
   hasScroll:string;
@@ -25,17 +21,14 @@ export class TaskComponent implements OnInit, DoCheck {
     ? this.hasScroll = 'scroll' : this.hasScroll = '';
   }
   
-  handleChange(val:string) {
-    this.task.state = val;
-    localStorage.setItem('savedTasks', JSON.stringify(this.taskList));
+  handleChange(value:string) {
+    this.taskListService.update(this.task, value);
   }
-  removeTask(id:number) { this.removeTaskEvent.emit(id); }
+  removeTask(id:number) {
+    this.taskListService.remove(this.task);
+  }
   renameTask() {
-    let newTitle = prompt('Escribe un nuevo nombre para tarea:');
-    newTitle?.toString();
-    if (newTitle?.trim()) this.task.taskTitle = newTitle;
-    localStorage.setItem('savedTasks', JSON.stringify(this.taskList));
-    setTimeout(() => this.setScrollable(), 1); //Apaño provisional
+    this.taskListService.update(this.task);
   }
   showFullTitle() { alert(this.task.taskTitle) }
 
